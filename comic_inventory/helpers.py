@@ -38,3 +38,20 @@ class JSONEncoder(json.JSONEncoder):
         if isinstance(obj, decimal.Decimal):
             return str(obj)
         return json.JSONEncoder(JSONEncoder, self).default(obj)
+    
+
+def random_quote_generator():
+    url = "https://famous-quotes4.p.rapidapi.com/random"
+
+    querystring = {"category":"all","count":"2"}
+
+    headers = {
+        "X-RapidAPI-Key": "73c9a2e9f3mshb8e06bc4d900199p10e699jsn05beb9421bc1",
+        "X-RapidAPI-Host": "famous-quotes4.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    data = response.json()
+
+    return data[0]['author'] + ' ' + data[0]['text']

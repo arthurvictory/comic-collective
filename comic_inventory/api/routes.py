@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from comic_inventory.helpers import token_required
+from comic_inventory.helpers import token_required, random_quote_generator
 from comic_inventory.models import db, Comic, comic_schema, comics_schema
 
 
@@ -19,7 +19,7 @@ def create_comic(our_user):
     description = request.json['description']
     price = request.json['price']
     quality = request.json['quality']
-    random_quote = "" # Come back and add the random joke generator function
+    random_quote = random_quote_generator()
     user_token = our_user.token
 
     print(f"User Token: {our_user.token}")
@@ -64,6 +64,7 @@ def update_drone(our_user, id):
     comic.description = request.json['description']
     comic.price = request.json['price']
     comic.quality = request.json['quality']
+    comic.random_quote = random_quote_generator()
     comic.user_token = our_user.token
 
     db.session.commit()
