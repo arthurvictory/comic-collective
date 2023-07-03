@@ -1,0 +1,1 @@
+gunicorn 'comic_inventory:app'
