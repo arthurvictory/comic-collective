@@ -2,4 +2,3 @@ comic_env
 __pycache__
 .env
 migrations
-requirements.txt
